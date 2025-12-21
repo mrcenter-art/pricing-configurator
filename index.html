@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pricing Configurator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    <script type="module">
+        import React from 'https://esm.sh/react@19';
+        import ReactDOM from 'https://esm.sh/react-dom@19/client';
+        import { useState, useEffect } from 'https://esm.sh/react@19';
+
+        function PricingConfigurator() {
+            const [selectedTier, setSelectedTier] = useState('');
+            const [price, setPrice] = useState(0);
+            
+            const tiers = {
+                basic: { name: 'Basic Support', price: 50 },
+                standard: { name: 'Standard Support', price: 100 },
+                premium: { name: 'Premium Support', price: 200 }
+            };
+
+            useEffect(() => {
+                if (selectedTier) {
+                    window.parent.postMessage({
+                        type: 'pricing-selected',
+                        tier: selectedTier,
+                        price: tiers[selectedTier].price
+                    }, '*');
+                }
+            }, [selectedTier]);
+
+            return React.createElement('div', {
+                className: 'min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8'
+            },
+                React.createElement('div', {
+                    className: 'max-w-4xl mx-auto'
+                },
+                    React.createElement('h1', {
+                        className: 'text-4xl font-bold text-center mb-8 text-gray-800'
+                    }, 'Choose Your Support Tier'),
+                    React.createElement('div', {
+                        className: 'grid grid-cols-1 md:grid-cols-3 gap-6'
+                    },
+                        ...Object.entries(tiers).map(([key, tier]) =>
+                            React.createElement('div', {
+                                key: key,
+                                className: `bg-white rounded-lg shadow-lg p-6 cursor-pointer transform transition hover:scale-105 ${
+                                    selectedTier === key ? 'ring-4 ring-blue-500' : ''
+                                }`,
+                                onClick: () => setSelectedTier(key)
+                            },
+                                React.createElement('h2', {
+                                    className: 'text-2xl font-semibold mb-4 text-gray-800'
+                                }, tier.name),
+                                React.createElement('p', {
+                                    className: 'text-4xl font-bold text-blue-600 mb-4'
+                                }, `$${tier.price}`),
+                                React.createElement('button', {
+                                    className: `w-full py-2 px-4 rounded-lg font-semibold ${
+                                        selectedTier === key
+                                            ? 'bg-blue-600 text-white'
+                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                    }`
+                                }, selectedTier === key ? 'Selected' : 'Select')
+                            )
+                        )
+                    )
+                )
+            );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(React.createElement(PricingConfigurator));
+    </script>
+</body>
+</html>
