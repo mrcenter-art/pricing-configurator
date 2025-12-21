@@ -3,78 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pricing Configurator</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Support Level | Help Is Hope</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'futura-lt-w01-book', 'futura-lt-w05-book', sans-serif;
+            background: #f5f3ed;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .header h1 {
+            font-size: 48px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-bottom: 10px;
+        }
+        
+        .header h1 .highlight {
+            color: #c5a362;
+        }
+        
+        .header p {
+            font-size: 16px;
+            color: #737373;
+            line-height: 1.6;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px 30px;
+            position: relative;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #c5a362;
+        }
+        
+        .badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #000;
+            color: #fff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge::before {
+            content: '✦ ';
+            color: #c5a362;
+        }
+        
+        .access-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: #999;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+        
+        .tier-name {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2b2b2b;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 56px;
+            font-weight: 700;
+            color: #c5a362;
+            margin-bottom: 20px;
+        }
+        
+        .description {
+            font-size: 14px;
+            color: #737373;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            min-height: 60px;
+        }
+        
+        .features {
+            text-align: left;
+            margin-bottom: 30px;
+        }
+        
+        .feature {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            font-size: 13px;
+            color: #737373;
+        }
+        
+        .feature.gold {
+            color: #c5a362;
+        }
+        
+        .feature .checkmark {
+            color: #c5a362;
+            margin-right: 12px;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+        
+        .feature.gray .checkmark {
+            color: #d3d3d3;
+        }
+        
+        .feature-text {
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-size: 11px;
+        }
+        
+        .select-btn {
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .select-btn.selected {
+            background: #c5a362;
+            color: white;
+        }
+        
+        .select-btn.unselected {
+            background: #e8e8e8;
+            color: #999;
+        }
+        
+        .select-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+        
+        @media (max-width: 968px) {
+            .pricing-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module">
-        import React from 'https://esm.sh/react@19';
-        import ReactDOM from 'https://esm.sh/react-dom@19/client';
-        import { useState, useEffect } from 'https://esm.sh/react@19';
-
-        function PricingConfigurator() {
-            const [selectedTier, setSelectedTier] = useState('');
-            const [price, setPrice] = useState(0);
+    <div class="container">
+        <div class="header">
+            <h1>Choose Your <span class="highlight">Support Level</span></h1>
+            <p>Every service starts at $0 to ensure absolute access. Choose the interaction level that suits your journey.</p>
+        </div>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card featured" data-tier="self-starter">
+                <div class="access-label">SELF-PACED ACCESS</div>
+                <div class="tier-name">Self-Starter Support</div>
+                <div class="price">$0</div>
+                <div class="description">Digital assessment with resources and an action plan emailed within minutes.</div>
+                <div class="features">
+                    <div class="feature gold">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Personalized Digital Assessment</span>
+                    </div>
+                    <div class="feature gold">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Instant Email Action Plan</span>
+                    </div>
+                    <div class="feature gold">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Curated Resources & Tools</span>
+                    </div>
+                    <div class="feature gold">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Front Desk Check-In Only</span>
+                    </div>
+                </div>
+                <button class="select-btn selected">SELECTED</button>
+            </div>
             
-            const tiers = {
-                basic: { name: 'Basic Support', price: 50 },
-                standard: { name: 'Standard Support', price: 100 },
-                premium: { name: 'Premium Support', price: 200 }
-            };
-
-            useEffect(() => {
-                if (selectedTier) {
-                    window.parent.postMessage({
-                        type: 'pricing-selected',
-                        tier: selectedTier,
-                        price: tiers[selectedTier].price
-                    }, '*');
-                }
-            }, [selectedTier]);
-
-            return React.createElement('div', {
-                className: 'min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 p-8'
-            },
-                React.createElement('div', {
-                    className: 'max-w-4xl mx-auto'
-                },
-                    React.createElement('h1', {
-                        className: 'text-4xl font-bold text-center mb-8 text-gray-800'
-                    }, 'Choose Your Support Tier'),
-                    React.createElement('div', {
-                        className: 'grid grid-cols-1 md:grid-cols-3 gap-6'
-                    },
-                        ...Object.entries(tiers).map(([key, tier]) =>
-                            React.createElement('div', {
-                                key: key,
-                                className: `bg-white rounded-lg shadow-lg p-6 cursor-pointer transform transition hover:scale-105 ${
-                                    selectedTier === key ? 'ring-4 ring-blue-500' : ''
-                                }`,
-                                onClick: () => setSelectedTier(key)
-                            },
-                                React.createElement('h2', {
-                                    className: 'text-2xl font-semibold mb-4 text-gray-800'
-                                }, tier.name),
-                                React.createElement('p', {
-                                    className: 'text-4xl font-bold text-blue-600 mb-4'
-                                }, `$${tier.price}`),
-                                React.createElement('button', {
-                                    className: `w-full py-2 px-4 rounded-lg font-semibold ${
-                                        selectedTier === key
-                                            ? 'bg-blue-600 text-white'
-                                            : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                    }`
-                                }, selectedTier === key ? 'Selected' : 'Select')
-                            )
-                        )
-                    )
-                )
-            );
-        }
-
-        const root = ReactDOM.createRoot(document.getElementById('root'));
-        root.render(React.createElement(PricingConfigurator));
+            <div class="pricing-card" data-tier="enhanced">
+                <div class="access-label">15 MIN ACCESS</div>
+                <div class="tier-name">Enhanced Personalized Session</div>
+                <div class="price">$9</div>
+                <div class="description">1:1 Support with a Certified Peer Specialist for focused personal guidance.</div>
+                <div class="features">
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Self-Starter Access Included</span>
+                    </div>
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">1:1 Certified Peer Specialist</span>
+                    </div>
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">15-Min Human-Led Session</span>
+                    </div>
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Lived Experience Insights</span>
+                    </div>
+                </div>
+                <button class="select-btn unselected">SELECT</button>
+            </div>
+            
+            <div class="pricing-card" data-tier="hybrid">
+                <div class="badge">MOST RECOMMENDED</div>
+                <div class="access-label">30 MIN ACCESS</div>
+                <div class="tier-name">Hybrid Support Session</div>
+                <div class="price">$18</div>
+                <div class="description">Person-Led Peer Support Smart Session with AI Assistance and a Digital Summary Report.</div>
+                <div class="features">
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Enhanced Access Included</span>
+                    </div>
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">30-Min Human + AI Session</span>
+                    </div>
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Smart Session Technology</span>
+                    </div>
+                    <div class="feature gray">
+                        <span class="checkmark">✓</span>
+                        <span class="feature-text">Detailed Digital Report</span>
+                    </div>
+                </div>
+                <button class="select-btn unselected">SELECT</button>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let selectedTier = 'self-starter';
+        
+        document.querySelectorAll('.select-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.pricing-card');
+                const tier = card.dataset.tier;
+                
+                // Update UI
+                document.querySelectorAll('.select-btn').forEach(b => {
+                    b.classList.remove('selected');
+                    b.classList.add('unselected');
+                    b.textContent = 'SELECT';
+                });
+                
+                this.classList.remove('unselected');
+                this.classList.add('selected');
+                this.textContent = 'SELECTED';
+                
+                selectedTier = tier;
+                
+                // Send message to parent window
+                window.parent.postMessage({
+                    type: 'pricing-selected',
+                    tier: tier,
+                    price: card.querySelector('.price').textContent
+                }, '*');
+            });
+        });
     </script>
 </body>
 </html>
