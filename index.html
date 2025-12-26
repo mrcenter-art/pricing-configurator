@@ -121,7 +121,7 @@ const handleConfirm = () => {
       const serviceId = new URLSearchParams(window.location.search).get('serviceId') || 'life-navigation-launchpad-1';
       
       // Build booking URL with plan parameters
-      const bookingUrl = `https://www.helpishope.org/book-service?serviceId=${serviceId}&plan=${planId}&tierName=${encodeURIComponent(currentTier.name)}&price=${currentTier.price}`;
+      const bookingUrl = `https://www.helpishope.org/book-online?serviceId=${serviceId}&plan=${planId}&tierName=${encodeURIComponent(currentTier.name)}&price=${currentTier.price}`;
       
       // Try postMessage first (if embedded)
       if (window.parent && window.parent !== window) {
