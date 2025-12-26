@@ -123,20 +123,13 @@ const handleConfirm = () => {
       // Build booking URL with plan parameters
       const bookingUrl = `https://www.helpishope.org/service-page/life-navigation-launchpad-1?serviceId=${serviceId}&plan=${planId}&tierName=${encodeURIComponent(currentTier.name)}&price=${currentTier.price}`;
       
-      // Try postMessage first (if embedded)
-      if (window.parent && window.parent !== window) {
-        window.parent.postMessage({
-          type: 'HIH_START_BOOKING',
-          tierName: currentTier.name,
-          price: currentTier.price,
-          planId: planId,
-          bookingUrl: bookingUrl
-        }, "*");
-      } else {
-        // If standalone, navigate directly
+    // Navigate parent page directly (works in iframe)
+    try {
+        window.top.location.href = bookingUrl;
+    } catch (e) {
+        // Fallback if top access is blocked
         window.location.href = bookingUrl;
-      }
-    };
+    }
 
         return React.createElement('div', { className: "min-h-screen bg-transparent font-sans antialiased text-black p-4 md:p-6" },
           React.createElement('div', { className: "max-w-6xl mx-auto space-y-6" },
